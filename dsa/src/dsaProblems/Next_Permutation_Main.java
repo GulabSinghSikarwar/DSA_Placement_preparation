@@ -8,70 +8,85 @@ public class Next_Permutation_Main {
     static List<Integer> nextPermutation(int N, int arr[]) {
         // code here
         List<Integer> list = new ArrayList<>();
-        int k = Integer.MIN_VALUE;
+     int k=arr.length-1;
+
 
         int n = arr.length;
 
-
-        for (int i = 1; i < n; i++) {
-            if (i > k && arr[i] > arr[i - 1]) {
-                k = i;
-
+        for (k = n - 2; k >= 0; k--) {
+            if (arr[k] < arr[k + 1]) {
+                break;
             }
+        }
+        int l=0;
+if(k<0){
+//    reverse from start  to end
+    reverse(arr,0,n-1);
+
+}
+else{
+    for(int i=n-1;i>k;i--)
+    {
+        if(arr[i]>arr[k])
+        {
+            System.out.println("l-->"+l);
+
+            l=i;
+            break;
 
         }
-        int l = Integer.MIN_VALUE;
+    }
+//    swap
+    System.out.println(" k and l are : "+k+" --- "+l);
 
-        for (int i = k + 1; i < n; i++) {
-            if (isGreater(arr, i, k)) ;
-            {
-                l =i;
-                
-                System.out.println(" Vallue Of K ::" + k + " Value Of l::" + l + "  Value of arr[k]::" + arr[k] + "  Value of arr[l]" + arr[l]);
+   swap(arr,k,l);
 
-            }
+//    reverse
+    reverse(arr,k+1,n-1);
 
-        }
+    fillElements(arr,list);
+    printList(list);
 
-        System.out.println("the Value Of L:" + l + " The Value of K :" + k);
 
-        System.out.println("Before Swaping :" + Arrays.toString(arr));
 
-        int temp = arr[l];
-        arr[l] = arr[k];
-        arr[k] = temp;
-        System.out.println("After Swaping :" + Arrays.toString(arr));
-        int j = 0;
-        for (; j <= k; j++) {
-
-            list.add(arr[j]);
-            System.out.println(list);
-        }
-        n -= 1;
-
-        while (n >= k + 1) {
-            list.add(arr[n]);
-            n--;
-
-        }
-
-        System.out.println(list);
+}
 
 
         return list;
 
     }
 
-    private static boolean isGreater(int[] arr, int i, int k) {
-        if(arr[i]>arr[k])
-            return true;
-        else
-            return false;
+    private static void printList(List<Integer> list) {
+        System.out.println(list);
+    }
+
+    private static void fillElements(int[] arr, List<Integer> list) {
+        for (int ele:arr)
+            list.add(ele);
+    }
+
+    private static void reverse(int[] arr, int i, int j) {
+
+        while(i<=j){
+            swap(arr,i,j);
+            i++;
+            j--;
+
+
+        }
+
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
 
     }
 
     public static void main(String[] args) {
         int arr[] = {1, 2, 3, 6, 5, 4};
+        System.out.println("Intial Arrays ::"+Arrays.toString(arr));
         nextPermutation(arr.length, arr);
 
 
