@@ -26,7 +26,7 @@ public class Word_break_DP {
 
                 for(int j=i+1;j<=size;j++)
                 {
-                    if(dp[j]==false &&   dictionaryContains(word.substring(0,i),dictionary))
+                    if(dp[j]==false &&   dictionaryContains(word.substring(i,j),dictionary))
                         dp[j]=true;
 
                     if(j==size &&  dp[j]==true)
