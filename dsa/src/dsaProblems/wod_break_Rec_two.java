@@ -56,7 +56,7 @@ public class wod_break_Rec_two<dictionary> {
         boolean output =word_break(str,dictionary);
         System.out.println(output);
         ArrayList<String> list=new ArrayList<>();
-        list.con
+
 
 
     }
