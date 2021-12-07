@@ -3,7 +3,7 @@ package dsaProblems;
 import java.util.Stack;
 
 public class MinimumNoOfSwapsForBracketBalancing {
-    static int minimumNumberOfSwaps(String str){
+    /*static int minimumNumberOfSwaps(String str){
         // []][][
         int n=str.length();
 
@@ -15,36 +15,30 @@ public class MinimumNoOfSwapsForBracketBalancing {
         for (int i = 0; i <n ; i++) {
             if (stack.isEmpty())
             {
-                stack.push(str.charAt(i));
+             stack.push(str.charAt(i));
 
             }
             else {
-                if (stack.peek()=='[')
-                {
-                    if (str.charAt(i)==']')
-                        stack.pop();
-                    else {
-                        // i= '['
-                        if (i<n-1)
-                            stack.push(str.charAt(i));
-                        else  count++;
-
-
-                    }
-                }
-                else {
-                    //pekk = ]
-                    if (str.charAt(i)=='[') {
-                        stack.pop();
-                        count++;
-
-                    }
+                if (stack.peek()=='[' && str.charAt(i)==']')
+                    stack.pop();
+                 else if (stack.peek()==']' && str.charAt(i)=='[') {
+                    stack.pop();
+                    count++;
+                    System.out.print(count+" : ");
 
                 }
+
+
             }
 
-System.out.println(stack);
+
+
             }
+        stack.push('-');
+
+
+
+        System.out.println(stack+" =="+ stack.size());
 
 
 
@@ -53,11 +47,38 @@ System.out.println(stack);
 
         return count;
 
-    }
+    }*/
 
+    static int minimumNumberOfSwaps(String str){
+      int count=0;
+      int n=str.length();
+      int left=0;
+      int right=0;
+      int imbalance=0;
+      for (int i=0;i<n;i++)
+      {
+          if (str.charAt(i)=='[')
+          {
+              left++;
+
+              if (imbalance>0)
+              {
+                  count+=imbalance;
+                  imbalance--;
+              }
+          }
+          else if (str.charAt(i)==']')
+          {
+              right++;
+              imbalance=right-left;
+
+          }
+      }
+        return count;
+    }
     public static void main(String[] args) {
 //        String str="[[][]]";
-        String str=" []][][";
+        String str="[]][][";
 
         System.out.println(minimumNumberOfSwaps(str));
 
